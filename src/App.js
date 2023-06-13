@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+
+// components
+import Navbar from './components/Navbar'
+import CartContainer from './components/CartContainer'
+
+import cartItems from './data'
+import {legacy_createStore} from 'redux'
+
+import reducer from './reducer'
+import { Provider } from 'react-redux'
+
+// initial store
+const initialStore={
+  cart:cartItems,
+  total:0,
+  amount:0
+}
+// store
+const store=legacy_createStore(reducer,initialStore)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <Provider store={store}>
+  <Navbar  />
+  <CartContainer />
+  </Provider>
   );
 }
 
